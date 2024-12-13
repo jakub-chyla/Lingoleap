@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {MatButton} from "@angular/material/button";
+import {MatCard, MatCardContent} from "@angular/material/card";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    MatButton,
+    MatCard,
+    MatCardContent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
