@@ -18,7 +18,7 @@ const wordsList: Word[] = [
   new Word("imposter", "oszust"),
   new Word("clerk", "urzędnik"),
   new Word("rugged", "chropowaty"),
-  new Word("rouge", "łobuz"),
+  new Word("rogue", "łobuz"),
 ];
 
 @Component({
