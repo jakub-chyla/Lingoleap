@@ -1,11 +1,17 @@
 <div class="center">
   <mat-card class="card" appearance="outlined">
     <mat-card-content class="container">
-      <div class="">
-        {{'text'}}
+      <div class="word">
+        {{ currentWord.english }}
+      </div>
+      <div class="word">
+        {{ currentWord.polish }}
       </div>
       <div class="">
-        <button mat-raised-button color="accent">Random</button>
+        <button mat-raised-button color="accent" (click)="displayRandomWord()">Random</button>
+        <button mat-raised-button color="accent" (click)="readText()"><span class="material-symbols-outlined">
+home
+</span></button>
       </div>
     </mat-card-content>
   </mat-card>

@@ -1,4 +1,4 @@
-.center{
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,10 +13,16 @@
   margin: 20px auto;
 }
 
-.container{
-  width: 600px;
-  height: 200px;
+.container {
+  width: 20vw;
+  min-width: 200px;
+  height: 150px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+
+.word {
+  font-weight: bold;
+  font-size: 22px;
 }
