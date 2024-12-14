@@ -49,9 +49,25 @@ export class AppComponent implements OnInit {
   readText() {
     if ('speechSynthesis' in window) {
       const speech = new SpeechSynthesisUtterance(this.currentWord.english);
-      window.speechSynthesis.speak(speech);
+      speech.lang = 'en-US';
+
+      const setVoice = () => {
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(voice => voice.lang.startsWith('en') && voice.name.includes('English'));
+        if (englishVoice) {
+          speech.voice = englishVoice;
+        }
+        window.speechSynthesis.speak(speech);
+      };
+
+      if (window.speechSynthesis.getVoices().length > 0) {
+        setVoice();
+      } else {
+        window.speechSynthesis.onvoiceschanged = setVoice;
+      }
     } else {
       alert('Text-to-speech is not supported in your browser.');
     }
   }
+
 }
