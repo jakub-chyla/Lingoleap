@@ -41,11 +41,12 @@ const wordsList: Word[] = [
 })
 export class AppComponent implements OnInit {
   wordsList: Word[] = [];
+  answers: string[] = [];
   currentWord!: Word;
-  answer1!: string;
-  answer2!: string;
-  answer3!: string;
   isChecked = false;
+  disableButton1 = false;
+  disableButton2 = false;
+  disableButton3 = false;
 
   ngOnInit() {
     this.wordsList = wordsList;
@@ -58,19 +59,39 @@ export class AppComponent implements OnInit {
 
   shuffle() {
     this.currentWord = this.wordsList[this.getRandomIndex(this.wordsList.length)];
-    this.answer1 = this.wordsList[this.getRandomIndex(this.wordsList.length)].polish;
-    this.answer2 = this.wordsList[this.getRandomIndex(this.wordsList.length)].polish;
-    this.answer3 = this.wordsList[this.getRandomIndex(this.wordsList.length)].polish;
+    this.answers = [
+      this.currentWord.polish,
+      this.wordsList[this.getRandomIndex(this.wordsList.length)].polish,
+      this.wordsList[this.getRandomIndex(this.wordsList.length)].polish
+    ];
+    this.answers = this.shuffleArray(this.answers);
+    this.disableButton1 = false;
+    this.disableButton2 = false;
+    this.disableButton3 = false;
   }
 
-  checkAnswer(answer: string) {
-    if(answer === this.currentWord.polish){
-      console.log(true)
-    }else {
-      console.log(false)
+  shuffleArray(array: string[]): string[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  checkAnswer() {
+    if (this.currentWord.polish === this.answers[0]) {
+      this.disableButton2 = true;
+      this.disableButton3 = true;
+    }
+    if (this.currentWord.polish === this.answers[1]) {
+      this.disableButton1 = true;
+      this.disableButton3 = true;
+    }
+    if (this.currentWord.polish === this.answers[2]) {
+      this.disableButton1 = true;
+      this.disableButton2 = true;
     }
   }
-
 
   readText() {
     if ('speechSynthesis' in window) {
