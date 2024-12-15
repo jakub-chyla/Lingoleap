@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {MatCard, MatCardContent} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
 import {Word} from "./word";
+import {FormsModule} from "@angular/forms";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {NgIf} from "@angular/common";
 
 const wordsList: Word[] = [
   new Word("conducted by", "prowadzone przez"),
@@ -11,7 +14,7 @@ const wordsList: Word[] = [
   new Word("persuasive", "przekonywający"),
   new Word("discrepancy", "rozbieżność"),
   new Word("abbreviation", "skrót"),
-  new Word("consistent", "spójny, konsekwentny"),
+  new Word("consistent", "konsekwentny"),
   new Word("resilient", "odporny"),
   new Word("verbose", "gadatliwy"),
   new Word("persistent", "wytrwały"),
@@ -27,7 +30,11 @@ const wordsList: Word[] = [
   imports: [
     MatButton,
     MatCard,
-    MatCardContent
+    MatCardContent,
+    FormsModule,
+    MatSlideToggle,
+    MatCardHeader,
+    NgIf
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -35,16 +42,35 @@ const wordsList: Word[] = [
 export class AppComponent implements OnInit {
   wordsList: Word[] = [];
   currentWord!: Word;
+  answer1!: string;
+  answer2!: string;
+  answer3!: string;
+  isChecked = false;
 
   ngOnInit() {
     this.wordsList = wordsList;
-    this.displayRandomWord();
+    this.shuffle();
   }
 
-  displayRandomWord() {
-    const randomIndex = Math.floor(Math.random() * this.wordsList.length);
-    this.currentWord = this.wordsList[randomIndex];
+  getRandomIndex(length: number): number {
+    return Math.floor(Math.random() * length);
   }
+
+  shuffle() {
+    this.currentWord = this.wordsList[this.getRandomIndex(this.wordsList.length)];
+    this.answer1 = this.wordsList[this.getRandomIndex(this.wordsList.length)].polish;
+    this.answer2 = this.wordsList[this.getRandomIndex(this.wordsList.length)].polish;
+    this.answer3 = this.wordsList[this.getRandomIndex(this.wordsList.length)].polish;
+  }
+
+  checkAnswer(answer: string) {
+    if(answer === this.currentWord.polish){
+      console.log(true)
+    }else {
+      console.log(false)
+    }
+  }
+
 
   readText() {
     if ('speechSynthesis' in window) {
