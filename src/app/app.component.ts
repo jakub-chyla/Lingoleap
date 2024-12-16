@@ -32,6 +32,14 @@ const wordsList: Word[] = [
   new Word("for quite some time", "przez jakiś czas"),
   new Word("smacked myself", "uderzyłem się"),
   new Word("get access", "uzyskąc dostęp"),
+  new Word("police spokesman", "rzecznik policji"),
+  new Word("holidaymakers", "wczasowicze"),
+  new Word("apparent", "pozorny"),
+  new Word("postponed in time", "odroczony w czasie"),
+  new Word("advocated", "popierał"),
+  new Word("cherished", "ceniony"),
+  new Word("grieve", "smucić"),
+  new Word("contrary", "przeciwnie"),
 ];
 
 @Component({
