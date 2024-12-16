@@ -10,21 +10,31 @@
           {{ currentWord.english }}
         </div>
         <div class="button-container answer-buttons">
-          <div>
-            <button [disabled]="disableButton1" class="answer-button" style="height: 50px" mat-raised-button color="primary"
-                    (click)="checkAnswer()">{{ answers[0] }}
-            </button>
-          </div>
-          <div>
-            <button [disabled]="disableButton2" class="answer-button" style="height: 50px" mat-raised-button color="primary"
-                    (click)="checkAnswer()">{{ answers[1] }}
-            </button>
-          </div>
-          <div>
-            <button [disabled]="disableButton3" class="answer-button" style="height: 50px" mat-raised-button color="primary"
-                    (click)="checkAnswer()">{{ answers[2] }}
-            </button>
-          </div>
+          <ng-template [ngIf]="isLoading">
+            <div style="width: 200px">
+              <mat-progress-bar mode="determinate" [value]="loadingValue"></mat-progress-bar>
+            </div>
+          </ng-template>
+          <ng-template [ngIf]="!isLoading">
+            <div>
+              <button [disabled]="disableButton1" class="answer-button" style="height: 50px" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer()">{{ answers[0] }}
+              </button>
+            </div>
+            <div>
+              <button [disabled]="disableButton2" class="answer-button" style="height: 50px" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer()">{{ answers[1] }}
+              </button>
+            </div>
+            <div>
+              <button [disabled]="disableButton3" class="answer-button" style="height: 50px" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer()">{{ answers[2] }}
+              </button>
+            </div>
+          </ng-template>
         </div>
       </ng-template>
       <ng-template [ngIf]="isChecked">

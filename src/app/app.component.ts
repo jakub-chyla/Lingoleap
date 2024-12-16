@@ -5,6 +5,7 @@ import {Word} from "./word";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {NgIf} from "@angular/common";
+import {MatProgressBar} from "@angular/material/progress-bar";
 
 const wordsList: Word[] = [
   new Word("conducted by", "prowadzone przez"),
@@ -30,6 +31,7 @@ const wordsList: Word[] = [
   new Word("hourly rate", "stawka godzinowa"),
   new Word("for quite some time", "przez jakiś czas"),
   new Word("smacked myself", "uderzyłem się"),
+  new Word("get access", "uzyskąc dostęp"),
 ];
 
 @Component({
@@ -42,7 +44,8 @@ const wordsList: Word[] = [
     FormsModule,
     MatSlideToggle,
     MatCardHeader,
-    NgIf
+    NgIf,
+    MatProgressBar
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -52,6 +55,8 @@ export class AppComponent implements OnInit {
   answers: string[] = [];
   currentWord!: Word;
   isChecked = false;
+  isLoading = true;
+  loadingValue = 0;
   disableButton1 = false;
   disableButton2 = false;
   disableButton3 = false;
@@ -66,6 +71,7 @@ export class AppComponent implements OnInit {
   }
 
   shuffle() {
+    this.smoothLoading();
     this.currentWord = this.wordsList[this.getRandomIndex(this.wordsList.length)];
     this.answers = [
       this.currentWord.polish,
@@ -77,6 +83,21 @@ export class AppComponent implements OnInit {
     this.disableButton2 = false;
     this.disableButton3 = false;
   }
+
+  smoothLoading(): void {
+    const intervalDuration = 200;
+    this.loadingValue = 0;
+    this.isLoading = true;
+    const interval = setInterval(() => {
+      this.loadingValue += 7;
+      if (this.loadingValue >= 100) {
+        clearInterval(interval);
+        this.isLoading = false;
+      }
+    }, intervalDuration);
+  }
+
+
 
   shuffleArray(array: string[]): string[] {
     for (let i = array.length - 1; i > 0; i--) {
