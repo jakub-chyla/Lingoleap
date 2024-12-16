@@ -24,8 +24,12 @@ const wordsList: Word[] = [
   new Word("rogue", "łobuz"),
   new Word("gathered", "zbierać"),
   new Word("prioritize", "ustalać priorytety"),
-  new Word("combating", "ustalać zwalczanie"),
+  new Word("combating", "zwalczanie"),
   new Word("wanderlust", "zamiłowanie do włóczęgi"),
+  new Word("despite", "pomimo"),
+  new Word("hourly rate", "stawka godzinowa"),
+  new Word("for quite some time", "przez jakiś czas"),
+  new Word("smacked myself", "uderzyłem się"),
 ];
 
 @Component({
