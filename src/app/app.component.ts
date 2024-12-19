@@ -40,6 +40,11 @@ const wordsList: Word[] = [
   new Word("cherished", "ceniony"),
   new Word("grieve", "smucić"),
   new Word("contrary", "przeciwnie"),
+  new Word("newcomers", "przybysze"),
+  new Word("water scarcity", "niedobór wody"),
+  new Word("entire world", "cały świat"),
+  new Word("price surge", "wzrost cen"),
+  new Word("transaction fees", "opłaty transakcyjne"),
 ];
 
 @Component({
@@ -62,9 +67,10 @@ export class AppComponent implements OnInit {
   wordsList: Word[] = [];
   answers: string[] = [];
   currentWord!: Word;
+  startCount: number = 3;
+  count!: number;
   isChecked = false;
   isLoading = true;
-  loadingValue = 0;
   disableButton1 = false;
   disableButton2 = false;
   disableButton3 = false;
@@ -79,7 +85,8 @@ export class AppComponent implements OnInit {
   }
 
   shuffle() {
-    this.smoothLoading();
+    // this.smoothLoading();
+    this.startCountdown();
     this.currentWord = this.wordsList[this.getRandomIndex(this.wordsList.length)];
     this.answers = [
       this.currentWord.polish,
@@ -92,20 +99,18 @@ export class AppComponent implements OnInit {
     this.disableButton3 = false;
   }
 
-  smoothLoading(): void {
-    const intervalDuration = 200;
-    this.loadingValue = 0;
+  startCountdown() {
+    this.count = this.startCount;
     this.isLoading = true;
     const interval = setInterval(() => {
-      this.loadingValue += 7;
-      if (this.loadingValue >= 100) {
+      if (this.count > 0) {
+        this.count--;
+      } else {
         clearInterval(interval);
         this.isLoading = false;
       }
-    }, intervalDuration);
+    }, 800);
   }
-
-
 
   shuffleArray(array: string[]): string[] {
     for (let i = array.length - 1; i > 0; i--) {
