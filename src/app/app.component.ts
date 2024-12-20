@@ -5,7 +5,6 @@ import {Word} from "./word";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {NgIf} from "@angular/common";
-import {MatProgressBar} from "@angular/material/progress-bar";
 
 const wordsList: Word[] = [
   new Word("conducted by", "prowadzone przez"),
@@ -57,8 +56,7 @@ const wordsList: Word[] = [
     FormsModule,
     MatSlideToggle,
     MatCardHeader,
-    NgIf,
-    MatProgressBar
+    NgIf
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -69,7 +67,10 @@ export class AppComponent implements OnInit {
   currentWord!: Word;
   startCount: number = 3;
   count!: number;
-  isChecked = false;
+  settings = false;
+  countDown = false;
+  autoNext = false;
+  autoRead = false;
   isLoading = true;
   disableButton1 = false;
   disableButton2 = false;
@@ -85,7 +86,6 @@ export class AppComponent implements OnInit {
   }
 
   shuffle() {
-    // this.smoothLoading();
     this.startCountdown();
     this.currentWord = this.wordsList[this.getRandomIndex(this.wordsList.length)];
     this.answers = [

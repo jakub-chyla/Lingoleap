@@ -1,11 +1,10 @@
 <div class="center">
   <mat-card class="card" appearance="outlined">
     <mat-card-header class="header-container">
-      {{ isChecked ? 'Study' : 'Quiz' }}
-      <mat-slide-toggle [(ngModel)]="isChecked"></mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="settings"></mat-slide-toggle>
     </mat-card-header>
     <mat-card-content class="container">
-      <ng-template [ngIf]="!isChecked">
+      <ng-template [ngIf]="!settings">
         <div class="word">
           {{ currentWord.english }}
         </div>
@@ -37,20 +36,26 @@
           </ng-template>
         </div>
       </ng-template>
-      <ng-template [ngIf]="isChecked">
+      <ng-template [ngIf]="settings">
         <div class="word">
-          {{ currentWord.english }}
+          {{ 'count down' }}
+          <mat-slide-toggle [(ngModel)]="countDown"></mat-slide-toggle>
         </div>
         <div class="word">
-          {{ currentWord.polish }}
+          {{ 'auto next' }}
+          <mat-slide-toggle [(ngModel)]="autoNext"></mat-slide-toggle>
+        </div>
+        <div class="word">
+          {{ 'auto read' }}
+          <mat-slide-toggle [(ngModel)]="autoRead"></mat-slide-toggle>
         </div>
       </ng-template>
       <div class="button-container">
         <div>
-          <button mat-raised-button color="accent" (click)="shuffle()">Shuffle</button>
+          <button [disabled]="settings" mat-raised-button color="accent" (click)="shuffle()">Shuffle</button>
         </div>
         <div>
-          <button mat-raised-button color="accent" (click)="readText()">
+          <button [disabled]="settings" mat-raised-button color="accent" (click)="readText()">
             <span class="material-icons">volume_up</span>
           </button>
         </div>

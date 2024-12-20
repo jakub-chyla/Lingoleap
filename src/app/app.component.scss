@@ -33,7 +33,12 @@
   gap: 8px;
 }
 
-
+.settings {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
 
 .header-container {
   display: flex;
