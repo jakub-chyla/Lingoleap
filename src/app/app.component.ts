@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {MatCard, MatCardContent} from "@angular/material/card";
 import {Word} from "./word";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
@@ -55,7 +55,6 @@ const wordsList: Word[] = [
     MatCardContent,
     FormsModule,
     MatSlideToggle,
-    MatCardHeader,
     NgIf
   ],
   templateUrl: './app.component.html',
@@ -64,6 +63,8 @@ const wordsList: Word[] = [
 export class AppComponent implements OnInit {
   wordsList: Word[] = [];
   answers: string[] = [];
+  correctAnswerCounter: number = 0;
+  inCorrectAnswerCounter: number = 0;
   currentWord!: Word;
   startCount: number = 3;
   count!: number;
@@ -109,7 +110,7 @@ export class AppComponent implements OnInit {
       this.wordsList[this.getRandomIndex(this.wordsList.length)].polish
     ];
     this.answers = this.shuffleArray(this.answers);
-    if(this.autoRead){
+    if (this.autoRead) {
       this.readText();
     }
     if (this.countDown) {
@@ -159,7 +160,7 @@ export class AppComponent implements OnInit {
     return array;
   }
 
-  checkAnswer() {
+  checkAnswer(answer: string) {
     if (this.currentWord.polish === this.answers[0]) {
       this.disableButton2 = true;
       this.disableButton3 = true;
@@ -172,8 +173,17 @@ export class AppComponent implements OnInit {
       this.disableButton1 = true;
       this.disableButton2 = true;
     }
+    this.countAnswer(answer);
     if (this.autoNext) {
       this.countdownAfterAnswer();
+    }
+  }
+
+  countAnswer(answer: string) {
+    if (this.currentWord.polish === answer) {
+      this.correctAnswerCounter++;
+    } else {
+      this.inCorrectAnswerCounter++;
     }
   }
 

@@ -1,8 +1,15 @@
 <div class="center">
   <mat-card class="card" appearance="outlined">
-    <mat-card-header class="header-container">
-      <mat-slide-toggle [(ngModel)]="settings"></mat-slide-toggle>
-    </mat-card-header>
+    <div class="header-container">
+      <div>
+        <span class="counter green-text">{{ correctAnswerCounter }}</span>
+        /
+        <span class="counter red-text">{{ inCorrectAnswerCounter }}</span>
+      </div>
+      <div>
+        <mat-slide-toggle [(ngModel)]="settings"></mat-slide-toggle>
+      </div>
+    </div>
     <mat-card-content class="container">
       <ng-template [ngIf]="!settings">
         <div class="word">
@@ -18,19 +25,19 @@
             <div>
               <button [disabled]="disableButton1" class="answer-button" style="height: 50px" mat-raised-button
                       color="primary"
-                      (click)="checkAnswer()">{{ answers[0] }}
+                      (click)="checkAnswer(answers[0])">{{ answers[0] }}
               </button>
             </div>
             <div>
               <button [disabled]="disableButton2" class="answer-button" style="height: 50px" mat-raised-button
                       color="primary"
-                      (click)="checkAnswer()">{{ answers[1] }}
+                      (click)="checkAnswer(answers[1])">{{ answers[1] }}
               </button>
             </div>
             <div>
               <button [disabled]="disableButton3" class="answer-button" style="height: 50px" mat-raised-button
                       color="primary"
-                      (click)="checkAnswer()">{{ answers[2] }}
+                      (click)="checkAnswer(answers[2])">{{ answers[2] }}
               </button>
             </div>
           </ng-template>

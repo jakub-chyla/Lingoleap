@@ -35,20 +35,34 @@
 
 .settings {
   cursor: pointer;
+
   &:hover {
     text-decoration: underline;
   }
 }
 
+.counter {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.green-text {
+  color: #00b500;
+}
+
+.red-text {
+  color: #ff7b7b;
+}
+
 .header-container {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   gap: 10px;
   padding-bottom: 10px;
 }
 
 .answer-button {
-  ::ng-deep  .mdc-button__label{
+  ::ng-deep .mdc-button__label {
     margin-left: -5px;
     margin-right: -5px;
   }
