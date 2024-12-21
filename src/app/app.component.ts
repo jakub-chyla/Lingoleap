@@ -71,14 +71,30 @@ export class AppComponent implements OnInit {
   countDown = false;
   autoNext = false;
   autoRead = false;
-  isLoading = true;
+  isLoading = false;
   disableButton1 = false;
   disableButton2 = false;
   disableButton3 = false;
 
   ngOnInit() {
     this.wordsList = wordsList;
+    this.settingInit();
     this.shuffle();
+  }
+
+  private settingInit() {
+    const storedCountDown = localStorage.getItem('countDown');
+    if (storedCountDown !== null) {
+      this.countDown = storedCountDown === 'true';
+    }
+    const storedAutoNext = localStorage.getItem('autoNext');
+    if (storedAutoNext !== null) {
+      this.autoNext = storedAutoNext === 'true';
+    }
+    const storedAutoRead = localStorage.getItem('autoRead');
+    if (storedAutoRead !== null) {
+      this.autoRead = storedAutoRead === 'true';
+    }
   }
 
   getRandomIndex(length: number): number {
@@ -86,7 +102,6 @@ export class AppComponent implements OnInit {
   }
 
   shuffle() {
-    this.startCountdown();
     this.currentWord = this.wordsList[this.getRandomIndex(this.wordsList.length)];
     this.answers = [
       this.currentWord.polish,
@@ -94,12 +109,24 @@ export class AppComponent implements OnInit {
       this.wordsList[this.getRandomIndex(this.wordsList.length)].polish
     ];
     this.answers = this.shuffleArray(this.answers);
+    if(this.autoRead){
+      this.readText();
+    }
+    if (this.countDown) {
+      this.countdownAfterShuffle();
+    }
     this.disableButton1 = false;
     this.disableButton2 = false;
     this.disableButton3 = false;
   }
 
-  startCountdown() {
+  settingChanged() {
+    localStorage.setItem('countDown', String(this.countDown));
+    localStorage.setItem('autoNext', String(this.autoNext));
+    localStorage.setItem('autoRead', String(this.autoRead));
+  }
+
+  countdownAfterShuffle() {
     this.count = this.startCount;
     this.isLoading = true;
     const interval = setInterval(() => {
@@ -110,6 +137,18 @@ export class AppComponent implements OnInit {
         this.isLoading = false;
       }
     }, 800);
+  }
+
+  countdownAfterAnswer() {
+    this.count = this.startCount;
+    const interval = setInterval(() => {
+      if (this.count > 0) {
+        this.count--;
+      } else {
+        clearInterval(interval);
+        this.shuffle();
+      }
+    }, 500);
   }
 
   shuffleArray(array: string[]): string[] {
@@ -132,6 +171,9 @@ export class AppComponent implements OnInit {
     if (this.currentWord.polish === this.answers[2]) {
       this.disableButton1 = true;
       this.disableButton2 = true;
+    }
+    if (this.autoNext) {
+      this.countdownAfterAnswer();
     }
   }
 
