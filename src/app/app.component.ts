@@ -44,6 +44,16 @@ const wordsList: Word[] = [
   new Word("entire world", "cały świat"),
   new Word("price surge", "wzrost cen"),
   new Word("transaction fees", "opłaty transakcyjne"),
+  new Word("delightful", "zachwycający"),
+  new Word("the place is packed", "miejsce jest zatłoczone"),
+  new Word("year prior", "rok wcześniej"),
+  new Word("incentives", "zachęty"),
+  new Word("subsidies", "dotacje"),
+  new Word("ruthless", "bezwzględny"),
+  new Word("frugal", "osczędny"),
+  new Word("stubborn", "uparty"),
+  new Word("counterfeit", "podróbka"),
+  new Word("notice", "wypowiedzenie"),
 ];
 
 @Component({
