@@ -54,6 +54,7 @@ const wordsList: Word[] = [
   new Word("stubborn", "uparty"),
   new Word("counterfeit", "podróbka"),
   new Word("notice", "wypowiedzenie"),
+  new Word("anytime soon", "w najbliższym czasie"),
 ];
 
 @Component({
