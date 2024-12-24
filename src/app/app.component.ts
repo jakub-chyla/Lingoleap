@@ -72,6 +72,7 @@ const wordsList: Word[] = [
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  initWordsList: Word[] = [];
   wordsList: Word[] = [];
   answers: string[] = [];
   correctAnswerCounter: number = 0;
@@ -89,7 +90,8 @@ export class AppComponent implements OnInit {
   disableButton3 = false;
 
   ngOnInit() {
-    this.wordsList = wordsList;
+    this.initWordsList = wordsList;
+    this.wordsList = [...this.initWordsList];
     this.settingInit();
     this.shuffle();
   }
@@ -114,11 +116,16 @@ export class AppComponent implements OnInit {
   }
 
   shuffle() {
-    this.currentWord = this.wordsList[this.getRandomIndex(this.wordsList.length)];
+    this.checkIfListIsEnd();
+
+    const index = this.getRandomIndex(this.wordsList.length)
+    this.currentWord = this.wordsList[index];
+    this.wordsList.splice(index, 1);
+
     this.answers = [
       this.currentWord.polish,
-      this.wordsList[this.getRandomIndex(this.wordsList.length)].polish,
-      this.wordsList[this.getRandomIndex(this.wordsList.length)].polish
+      this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+      this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish
     ];
     this.answers = this.shuffleArray(this.answers);
     if (this.autoRead) {
@@ -130,6 +137,12 @@ export class AppComponent implements OnInit {
     this.disableButton1 = false;
     this.disableButton2 = false;
     this.disableButton3 = false;
+  }
+
+  private checkIfListIsEnd() {
+    if (this.wordsList.length === 1) {
+      this.wordsList = [...this.initWordsList];
+    }
   }
 
   settingChanged() {
