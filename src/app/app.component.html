@@ -70,7 +70,7 @@
           <button [disabled]="settings" mat-raised-button color="accent" (click)="shuffle()">Shuffle</button>
         </div>
         <div>
-          <button [disabled]="settings" mat-raised-button color="accent" (click)="readText()">
+          <button [disabled]="settings || !englishToPolish" mat-raised-button color="accent" (click)="readText()">
             <span class="material-icons">volume_up</span>
           </button>
         </div>

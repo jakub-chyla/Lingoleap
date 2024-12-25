@@ -135,7 +135,7 @@ export class AppComponent implements OnInit {
 
     this.answers = this.shuffleArray(this.answers);
 
-    if (this.autoRead) {
+    if (this.autoRead && this.englishToPolish) {
       this.readText();
     }
     if (this.countDown) {
