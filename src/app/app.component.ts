@@ -118,33 +118,30 @@ export class AppComponent implements OnInit {
 
   shuffle() {
     this.checkIfListIsEnd();
+    this.setLanguage();
 
-    const index = this.getRandomIndex(this.wordsList.length)
-    this.currentWord = this.wordsList[index];
-    this.wordsList.splice(index, 1);
+    const index = this.getRandomIndex(this.wordsList.length);
+    this.currentWord = this.wordsList.splice(index, 1)[0];
 
-    //TODO refactor
-    if (this.englishToPolish) {
-      this.answers = [
-        this.currentWord.polish,
-        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish
-      ];
-    } else {
-      this.answers = [
-        this.currentWord.english,
-        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english
-      ];
-    }
+    const generateAnswers = (wordKey: keyof Word) => [
+      this.currentWord[wordKey],
+      this.initWordsList[this.getRandomIndex(this.initWordsList.length)][wordKey],
+      this.initWordsList[this.getRandomIndex(this.initWordsList.length)][wordKey]
+    ];
+
+    this.answers = this.englishToPolish
+      ? generateAnswers('polish')
+      : generateAnswers('english');
 
     this.answers = this.shuffleArray(this.answers);
+
     if (this.autoRead) {
       this.readText();
     }
     if (this.countDown) {
       this.countdownAfterShuffle();
     }
+
     this.disableButton1 = false;
     this.disableButton2 = false;
     this.disableButton3 = false;
@@ -154,6 +151,10 @@ export class AppComponent implements OnInit {
     if (this.wordsList.length === 1) {
       this.wordsList = [...this.initWordsList];
     }
+  }
+
+  setLanguage() {
+    this.englishToPolish = this.getRandomIndex(100) % 2 === 0;
   }
 
   settingChanged() {
@@ -196,43 +197,34 @@ export class AppComponent implements OnInit {
   }
 
   checkAnswer(answer: string) {
-    if (this.englishToPolish) {
-      if (this.currentWord.polish === this.answers[0]) {
-        this.disableButton2 = true;
-        this.disableButton3 = true;
-      }
-      if (this.currentWord.polish === this.answers[1]) {
-        this.disableButton1 = true;
-        this.disableButton3 = true;
-      }
-      if (this.currentWord.polish === this.answers[2]) {
-        this.disableButton1 = true;
-        this.disableButton2 = true;
-      }
-    }else {
-      if (this.currentWord.english === this.answers[0]) {
-        this.disableButton2 = true;
-        this.disableButton3 = true;
-      }
-      if (this.currentWord.english === this.answers[1]) {
-        this.disableButton1 = true;
-        this.disableButton3 = true;
-      }
-      if (this.currentWord.english === this.answers[2]) {
-        this.disableButton1 = true;
-        this.disableButton2 = true;
+    const isCorrect = (word: string, answer: string) => word === answer;
+
+    const updateButtonState = (correctIndex: number) => {
+      this.disableButton1 = correctIndex !== 0;
+      this.disableButton2 = correctIndex !== 1;
+      this.disableButton3 = correctIndex !== 2;
+    };
+
+    const currentWord = this.englishToPolish ? this.currentWord.polish : this.currentWord.english;
+
+    for (let i = 0; i < this.answers.length; i++) {
+      if (isCorrect(currentWord, this.answers[i])) {
+        updateButtonState(i);
+        break;
       }
     }
 
-
     this.countAnswer(answer);
+
     if (this.autoNext) {
       this.countdownAfterAnswer();
     }
   }
 
   countAnswer(answer: string) {
-    if (this.currentWord.polish === answer) {
+    const currentWord = this.englishToPolish ? this.currentWord.polish : this.currentWord.english;
+
+    if (currentWord === answer) {
       this.correctAnswerCounter++;
     } else {
       this.inCorrectAnswerCounter++;
