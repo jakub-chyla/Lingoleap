@@ -88,6 +88,7 @@ export class AppComponent implements OnInit {
   disableButton1 = false;
   disableButton2 = false;
   disableButton3 = false;
+  englishToPolish = false;
 
   ngOnInit() {
     this.initWordsList = wordsList;
@@ -122,11 +123,21 @@ export class AppComponent implements OnInit {
     this.currentWord = this.wordsList[index];
     this.wordsList.splice(index, 1);
 
-    this.answers = [
-      this.currentWord.polish,
-      this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-      this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish
-    ];
+    //TODO refactor
+    if (this.englishToPolish) {
+      this.answers = [
+        this.currentWord.polish,
+        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish
+      ];
+    } else {
+      this.answers = [
+        this.currentWord.english,
+        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+        this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english
+      ];
+    }
+
     this.answers = this.shuffleArray(this.answers);
     if (this.autoRead) {
       this.readText();
@@ -185,18 +196,35 @@ export class AppComponent implements OnInit {
   }
 
   checkAnswer(answer: string) {
-    if (this.currentWord.polish === this.answers[0]) {
-      this.disableButton2 = true;
-      this.disableButton3 = true;
+    if (this.englishToPolish) {
+      if (this.currentWord.polish === this.answers[0]) {
+        this.disableButton2 = true;
+        this.disableButton3 = true;
+      }
+      if (this.currentWord.polish === this.answers[1]) {
+        this.disableButton1 = true;
+        this.disableButton3 = true;
+      }
+      if (this.currentWord.polish === this.answers[2]) {
+        this.disableButton1 = true;
+        this.disableButton2 = true;
+      }
+    }else {
+      if (this.currentWord.english === this.answers[0]) {
+        this.disableButton2 = true;
+        this.disableButton3 = true;
+      }
+      if (this.currentWord.english === this.answers[1]) {
+        this.disableButton1 = true;
+        this.disableButton3 = true;
+      }
+      if (this.currentWord.english === this.answers[2]) {
+        this.disableButton1 = true;
+        this.disableButton2 = true;
+      }
     }
-    if (this.currentWord.polish === this.answers[1]) {
-      this.disableButton1 = true;
-      this.disableButton3 = true;
-    }
-    if (this.currentWord.polish === this.answers[2]) {
-      this.disableButton1 = true;
-      this.disableButton2 = true;
-    }
+
+
     this.countAnswer(answer);
     if (this.autoNext) {
       this.countdownAfterAnswer();

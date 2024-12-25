@@ -12,8 +12,11 @@
     </div>
     <mat-card-content class="container">
       <ng-template [ngIf]="!settings">
-        <div class="word">
+        <div *ngIf="englishToPolish" class="word">
           {{ currentWord.english }}
+        </div>
+        <div *ngIf="!englishToPolish" class="word">
+          {{ currentWord.polish }}
         </div>
         <div class="button-container answer-buttons">
           <ng-template [ngIf]="isLoading">
