@@ -56,6 +56,8 @@ const wordsList: Word[] = [
   new Word("notice", "wypowiedzenie"),
   new Word("anytime soon", "w najbliższym czasie"),
   new Word("miserable", "nieszczęśliwy"),
+  new Word("volatility", "zmienność"),
+  new Word("struggling", "zmagać się"),
 ];
 
 @Component({
@@ -117,6 +119,26 @@ export class AppComponent implements OnInit {
     return Math.floor(Math.random() * length);
   }
 
+  createAnswers() {
+    if (this.englishToPolish) {
+      do {
+        this.answers = [
+          this.currentWord.polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish
+        ];
+      } while (this.answers[1] === this.answers[2] || this.currentWord.polish === this.answers[1] || this.currentWord.polish === this.answers[2]);
+    } else {
+      do {
+        this.answers = [
+          this.currentWord.english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english
+        ];
+      } while (this.answers[1] === this.answers[2] || this.currentWord.english === this.answers[1] || this.currentWord.english === this.answers[2]);
+    }
+  }
+
   shuffle() {
     this.checkIfListIsEnd();
     this.setLanguage();
@@ -124,21 +146,14 @@ export class AppComponent implements OnInit {
     const index = this.getRandomIndex(this.wordsList.length);
     this.currentWord = this.wordsList.splice(index, 1)[0];
 
-    const generateAnswers = (wordKey: keyof Word) => [
-      this.currentWord[wordKey],
-      this.initWordsList[this.getRandomIndex(this.initWordsList.length)][wordKey],
-      this.initWordsList[this.getRandomIndex(this.initWordsList.length)][wordKey]
-    ];
-
-    this.answers = this.englishToPolish
-      ? generateAnswers('polish')
-      : generateAnswers('english');
+    this.createAnswers();
 
     this.answers = this.shuffleArray(this.answers);
 
     if (this.autoRead && this.englishToPolish) {
       this.readText();
     }
+
     if (this.countDown) {
       this.countdownAfterShuffle();
     }
@@ -205,6 +220,9 @@ export class AppComponent implements OnInit {
       this.disableButton2 = correctIndex !== 1;
       this.disableButton3 = correctIndex !== 2;
     };
+    if (this.autoRead) {
+      this.readText();
+    }
 
     const currentWord = this.englishToPolish ? this.currentWord.polish : this.currentWord.english;
 
