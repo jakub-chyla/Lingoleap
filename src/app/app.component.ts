@@ -58,6 +58,9 @@ const wordsList: Word[] = [
   new Word("miserable", "nieszczęśliwy"),
   new Word("volatility", "zmienność"),
   new Word("struggling", "zmagać się"),
+  new Word("regardless", "mimo wszystko"),
+  new Word("however", "Jednakże"),
+  new Word("according to", "według")
 ];
 
 @Component({
