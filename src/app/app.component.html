@@ -30,19 +30,19 @@
           </ng-template>
           <ng-template [ngIf]="!isLoading">
             <div>
-              <button [disabled]="disableButton1" class="answer-button" style="height: 50px" mat-raised-button
+              <button [disabled]="disableButton1" class="answer-button" mat-raised-button
                       color="primary"
                       (click)="checkAnswer(answers[0])">{{ answers[0] }}
               </button>
             </div>
             <div>
-              <button [disabled]="disableButton2" class="answer-button" style="height: 50px" mat-raised-button
+              <button [disabled]="disableButton2" class="answer-button" mat-raised-button
                       color="primary"
                       (click)="checkAnswer(answers[1])">{{ answers[1] }}
               </button>
             </div>
             <div>
-              <button [disabled]="disableButton3" class="answer-button" style="height: 50px" mat-raised-button
+              <button [disabled]="disableButton3" class="answer-button" mat-raised-button
                       color="primary"
                       (click)="checkAnswer(answers[2])">{{ answers[2] }}
               </button>

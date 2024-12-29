@@ -15,11 +15,13 @@
 
 .container {
   width: 30vw;
-  min-width: 325px;
+  min-width: 350px;
   height: 150px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .word {
@@ -62,8 +64,12 @@
 }
 
 .answer-button {
+  height: 60px;
+  border-radius: 8px;
   ::ng-deep .mdc-button__label {
-    margin-left: -5px;
-    margin-right: -5px;
+    margin-left: -10px;
+    margin-right: -10px;
+
+
   }
 }
