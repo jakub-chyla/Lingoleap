@@ -5,6 +5,7 @@ import {Word} from "./word";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {NgIf} from "@angular/common";
+import {MatDivider} from "@angular/material/divider";
 
 const wordsList: Word[] = [
   new Word("conducted by", "prowadzone przez"),
@@ -81,7 +82,8 @@ const wordsList: Word[] = [
     MatCardContent,
     FormsModule,
     MatSlideToggle,
-    NgIf
+    NgIf,
+    MatDivider
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -103,6 +105,11 @@ export class AppComponent implements OnInit {
   disableButton1 = false;
   disableButton2 = false;
   disableButton3 = false;
+  disableButton4 = false;
+  disableButton5 = false;
+  disableButton6 = false;
+  disableButton7 = false;
+  disableButton8 = false;
   englishToPolish = false;
 
   ngOnInit() {
@@ -131,21 +138,67 @@ export class AppComponent implements OnInit {
     return Math.floor(Math.random() * length);
   }
 
+  // createAnswers() {
+  //   if (this.englishToPolish) {
+  //     do {
+  //       this.answers = [
+  //         this.currentWord.polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+  //       ];
+  //     } while (this.answers[1] === this.answers[2] || this.currentWord.polish === this.answers[1] || this.currentWord.polish === this.answers[2]
+  //       );
+  //   } else {
+  //     do {
+  //       this.answers = [
+  //         this.currentWord.english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+  //       ];
+  //     } while (this.answers[1] === this.answers[2] || this.currentWord.english === this.answers[1] || this.currentWord.english === this.answers[2]);
+  //   }
+  // }
+
   createAnswers() {
     if (this.englishToPolish) {
       do {
         this.answers = [
           this.currentWord.polish,
           this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
         ];
-      } while (this.answers[1] === this.answers[2] || this.currentWord.polish === this.answers[1] || this.currentWord.polish === this.answers[2]);
+      } while (this.answers[1] === this.answers[2] || this.currentWord.polish === this.answers[1] || this.currentWord.polish === this.answers[2]
+        );
     } else {
       do {
         this.answers = [
           this.currentWord.english,
           this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
+          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
         ];
       } while (this.answers[1] === this.answers[2] || this.currentWord.english === this.answers[1] || this.currentWord.english === this.answers[2]);
     }
@@ -173,6 +226,11 @@ export class AppComponent implements OnInit {
     this.disableButton1 = false;
     this.disableButton2 = false;
     this.disableButton3 = false;
+    this.disableButton4 = false;
+    this.disableButton5 = false;
+    this.disableButton6 = false;
+    this.disableButton7 = false;
+    this.disableButton8 = false;
   }
 
   private checkIfListIsEnd() {
@@ -231,6 +289,12 @@ export class AppComponent implements OnInit {
       this.disableButton1 = correctIndex !== 0;
       this.disableButton2 = correctIndex !== 1;
       this.disableButton3 = correctIndex !== 2;
+      this.disableButton3 = correctIndex !== 3;
+      this.disableButton3 = correctIndex !== 4;
+      this.disableButton3 = correctIndex !== 5;
+      this.disableButton3 = correctIndex !== 6;
+      this.disableButton3 = correctIndex !== 7;
+      this.disableButton3 = correctIndex !== 8;
     };
     if (this.autoRead) {
       this.readText();

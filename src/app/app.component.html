@@ -22,7 +22,7 @@
             {{ currentWord.polish }}
           </div>
         </ng-template>
-        <div class="button-container answer-buttons">
+        <div class="button-container-row answer-buttons" style="padding-top: 14px">
           <ng-template [ngIf]="isLoading">
             <div>
               {{ count }}
@@ -49,6 +49,50 @@
             </div>
           </ng-template>
         </div>
+        <div class="button-container-row answer-buttons">
+          <ng-template [ngIf]="!isLoading">
+            <div>
+              <button [disabled]="disableButton1" class="answer-button" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer(answers[3])">{{ answers[3] }}
+              </button>
+            </div>
+            <div>
+              <button [disabled]="disableButton2" class="answer-button" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer(answers[4])">{{ answers[4] }}
+              </button>
+            </div>
+            <div>
+              <button [disabled]="disableButton3" class="answer-button" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer(answers[5])">{{ answers[5] }}
+              </button>
+            </div>
+          </ng-template>
+        </div>
+        <div class="button-container-row answer-buttons">
+          <ng-template [ngIf]="!isLoading">
+            <div>
+              <button [disabled]="disableButton1" class="answer-button" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer(answers[6])">{{ answers[6] }}
+              </button>
+            </div>
+            <div>
+              <button [disabled]="disableButton2" class="answer-button" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer(answers[7])">{{ answers[7] }}
+              </button>
+            </div>
+            <div>
+              <button [disabled]="disableButton3" class="answer-button" mat-raised-button
+                      color="primary"
+                      (click)="checkAnswer(answers[8])">{{ answers[8] }}
+              </button>
+            </div>
+          </ng-template>
+        </div>
       </ng-template>
       <ng-template [ngIf]="settings">
         <div class="word">
@@ -65,7 +109,7 @@
           <mat-slide-toggle [(ngModel)]="autoRead" (ngModelChange)="settingChanged()"></mat-slide-toggle>
         </div>
       </ng-template>
-      <div class="button-container">
+      <div class="button-container-row" style="padding-top:14px">
         <div>
           <button [disabled]="settings" mat-raised-button color="accent" (click)="shuffle()">Shuffle</button>
         </div>

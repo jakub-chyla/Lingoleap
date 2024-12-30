@@ -16,7 +16,7 @@
 .container {
   width: 30vw;
   min-width: 350px;
-  height: 150px;
+  height: 325px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -29,8 +29,9 @@
   font-size: 22px;
 }
 
-.button-container {
+.button-container-row {
   display: flex;
+
   justify-content: center;
   gap: 8px;
 }
@@ -69,7 +70,6 @@
   ::ng-deep .mdc-button__label {
     margin-left: -6px;
     margin-right: -6px;
-
 
   }
 }
