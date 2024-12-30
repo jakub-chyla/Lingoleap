@@ -5,7 +5,6 @@ import {Word} from "./word";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {NgIf} from "@angular/common";
-import {MatDivider} from "@angular/material/divider";
 
 const wordsList: Word[] = [
   new Word("conducted by", "prowadzone przez"),
@@ -60,7 +59,7 @@ const wordsList: Word[] = [
   new Word("volatility", "zmienność"),
   new Word("struggling", "zmagać się"),
   new Word("regardless", "mimo wszystko"),
-  new Word("however", "Jednakże"),
+  new Word("however", "jednakże"),
   new Word("according to", "według"),
   new Word("diminishing to", "malejący"),
   new Word("diverge", "odchodzić"),
@@ -82,8 +81,7 @@ const wordsList: Word[] = [
     MatCardContent,
     FormsModule,
     MatSlideToggle,
-    NgIf,
-    MatDivider
+    NgIf
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -110,6 +108,7 @@ export class AppComponent implements OnInit {
   disableButton6 = false;
   disableButton7 = false;
   disableButton8 = false;
+  disableButton9 = false;
   englishToPolish = false;
 
   ngOnInit() {
@@ -138,70 +137,33 @@ export class AppComponent implements OnInit {
     return Math.floor(Math.random() * length);
   }
 
-  // createAnswers() {
-  //   if (this.englishToPolish) {
-  //     do {
-  //       this.answers = [
-  //         this.currentWord.polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-  //       ];
-  //     } while (this.answers[1] === this.answers[2] || this.currentWord.polish === this.answers[1] || this.currentWord.polish === this.answers[2]
-  //       );
-  //   } else {
-  //     do {
-  //       this.answers = [
-  //         this.currentWord.english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //         this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-  //       ];
-  //     } while (this.answers[1] === this.answers[2] || this.currentWord.english === this.answers[1] || this.currentWord.english === this.answers[2]);
-  //   }
-  // }
-
   createAnswers() {
     if (this.englishToPolish) {
+      this.answers[0] = this.currentWord.polish;
+      for (let i = 1; i < 9; i++) {
+        this.answers[i] = this.getAnswer();
+      }
+    } else {
+      this.answers[0] = this.currentWord.english;
+      for (let i = 1; i < 9; i++) {
+        this.answers[i] = this.getAnswer();
+      }
+    }
+  }
+
+  getAnswer() {
+    let answer
+    if (this.englishToPolish) {
       do {
-        this.answers = [
-          this.currentWord.polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish,
-        ];
-      } while (this.answers[1] === this.answers[2] || this.currentWord.polish === this.answers[1] || this.currentWord.polish === this.answers[2]
-        );
+        answer = this.initWordsList[this.getRandomIndex(this.initWordsList.length)].polish;
+      } while (this.answers.includes(answer))
     } else {
       do {
-        this.answers = [
-          this.currentWord.english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-          this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english,
-        ];
-      } while (this.answers[1] === this.answers[2] || this.currentWord.english === this.answers[1] || this.currentWord.english === this.answers[2]);
+        answer = this.initWordsList[this.getRandomIndex(this.initWordsList.length)].english;
+      } while (this.answers.includes(answer))
     }
+
+    return answer;
   }
 
   shuffle() {
@@ -212,8 +174,7 @@ export class AppComponent implements OnInit {
     this.currentWord = this.wordsList.splice(index, 1)[0];
 
     this.createAnswers();
-
-    this.answers = this.shuffleArray(this.answers);
+    this.justifyAnswers();
 
     if (this.autoRead && this.englishToPolish) {
       this.readText();
@@ -231,9 +192,10 @@ export class AppComponent implements OnInit {
     this.disableButton6 = false;
     this.disableButton7 = false;
     this.disableButton8 = false;
+    this.disableButton9 = false;
   }
 
-  private checkIfListIsEnd() {
+  checkIfListIsEnd() {
     if (this.wordsList.length === 1) {
       this.wordsList = [...this.initWordsList];
     }
@@ -274,12 +236,19 @@ export class AppComponent implements OnInit {
     }, 500);
   }
 
-  shuffleArray(array: string[]): string[] {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+  justifyAnswers() {
+    const sortedAnswers = this.answers.sort((a, b) => a.length - b.length);
+    this.answers = [
+      sortedAnswers[0],
+      sortedAnswers[3],
+      sortedAnswers[8],
+      sortedAnswers[1],
+      sortedAnswers[4],
+      sortedAnswers[7],
+      sortedAnswers[2],
+      sortedAnswers[5],
+      sortedAnswers[3]
+    ];
   }
 
   checkAnswer(answer: string) {
@@ -289,12 +258,12 @@ export class AppComponent implements OnInit {
       this.disableButton1 = correctIndex !== 0;
       this.disableButton2 = correctIndex !== 1;
       this.disableButton3 = correctIndex !== 2;
-      this.disableButton3 = correctIndex !== 3;
-      this.disableButton3 = correctIndex !== 4;
-      this.disableButton3 = correctIndex !== 5;
-      this.disableButton3 = correctIndex !== 6;
-      this.disableButton3 = correctIndex !== 7;
-      this.disableButton3 = correctIndex !== 8;
+      this.disableButton4 = correctIndex !== 3;
+      this.disableButton5 = correctIndex !== 4;
+      this.disableButton6 = correctIndex !== 5;
+      this.disableButton7 = correctIndex !== 6;
+      this.disableButton8 = correctIndex !== 7;
+      this.disableButton9 = correctIndex !== 8;
     };
     if (this.autoRead) {
       this.readText();
