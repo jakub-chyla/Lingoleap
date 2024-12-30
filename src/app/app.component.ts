@@ -247,7 +247,7 @@ export class AppComponent implements OnInit {
       sortedAnswers[7],
       sortedAnswers[2],
       sortedAnswers[5],
-      sortedAnswers[3]
+      sortedAnswers[6]
     ];
   }
 
