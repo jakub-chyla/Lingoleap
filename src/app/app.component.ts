@@ -70,6 +70,10 @@ const wordsList: Word[] = [
   new Word("intended", "przeznaczony"),
   new Word("pristine", "dziewiczy"),
   new Word("eventually", "w końcu"),
+  new Word("worn out", "zużyte"),
+  new Word("top off", "dopełnić"),
+  new Word("somebody has to", "ktoś musi"),
+  new Word("intentional", "umyślny"),
   new Word("to lurk", "czaić się"),
   new Word("pardon my french", "przeprszam za przekleństwa"),
 ];
@@ -321,4 +325,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  settingsToggle() {
+    this.settings = !this.settings;
+  }
 }

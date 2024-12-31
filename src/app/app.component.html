@@ -7,7 +7,8 @@
         <span class="counter red-text">{{ inCorrectAnswerCounter }}</span>
       </div>
       <div>
-        <mat-slide-toggle [(ngModel)]="settings"></mat-slide-toggle>
+        <span *ngIf="settings" class="material-icons settings-close" (click)="settingsToggle()">close</span>
+        <span *ngIf="!settings" class="material-icons settings-open" (click)="settingsToggle()">settings</span>
       </div>
     </div>
     <mat-card-content class="container">

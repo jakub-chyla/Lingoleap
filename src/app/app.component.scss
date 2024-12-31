@@ -1,3 +1,7 @@
+$primary-color: #673ab7;
+$accent-color: #ffd740;
+$warn-color: #f24236;
+
 .center {
   display: flex;
   justify-content: center;
@@ -35,11 +39,17 @@
   gap: 8px;
 }
 
-.settings {
-  cursor: pointer;
-
+.settings-close {
   &:hover {
-    text-decoration: underline;
+    cursor: pointer;
+    color: $warn-color;
+  }
+}
+
+.settings-open {
+  &:hover {
+    cursor: pointer;
+    color: $accent-color;
   }
 }
 
