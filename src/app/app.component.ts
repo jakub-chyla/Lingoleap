@@ -62,14 +62,16 @@ const wordsList: Word[] = [
   new Word("however", "jednakże"),
   new Word("according to", "według"),
   new Word("diminishing to", "malejący"),
-  new Word("diverge", "odchodzić"),
+  new Word("diverge", "rozejście"),
   new Word("relentless", "nieustępliwy"),
   new Word("citation", "cytat"),
   new Word("it's not over", "to nie koniec"),
   new Word("it's been a while", "minęło trochę czasu"),
   new Word("intended", "przeznaczony"),
   new Word("pristine", "dziewiczy"),
+  new Word("eventually", "w końcu"),
   new Word("to lurk", "czaić się"),
+  new Word("pardon my french", "przeprszam za przekleństwa"),
 ];
 
 @Component({
