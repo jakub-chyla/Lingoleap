@@ -112,7 +112,7 @@
       </ng-template>
       <div class="button-container-row" style="padding-top:14px">
         <div>
-          <button [disabled]="settings" mat-raised-button color="accent" (click)="shuffle()">Shuffle</button>
+          <button [disabled]="settings || isLoading" mat-raised-button color="accent" (click)="shuffle()">Shuffle</button>
         </div>
         <div>
           <button [disabled]="settings || !englishToPolish" mat-raised-button color="accent" (click)="readText()">
