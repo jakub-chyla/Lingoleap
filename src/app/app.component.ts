@@ -113,6 +113,7 @@ export class AppComponent implements OnInit {
   autoNext = true;
   autoRead = false;
   isLoading = false;
+  newShuffle = false;
   disableButton1 = false;
   disableButton2 = false;
   disableButton3 = false;
@@ -206,6 +207,8 @@ export class AppComponent implements OnInit {
     this.disableButton7 = false;
     this.disableButton8 = false;
     this.disableButton9 = false;
+
+    this.newShuffle = true;
   }
 
   checkIfListIsEnd() {
@@ -291,7 +294,11 @@ export class AppComponent implements OnInit {
       }
     }
 
-    this.countAnswer(answer);
+
+    if (this.newShuffle) {
+      this.countAnswer(answer);
+      this.newShuffle = false;
+    }
 
     if (this.autoNext) {
       this.countdownAfterAnswer();
