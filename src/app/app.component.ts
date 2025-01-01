@@ -311,14 +311,26 @@ export class AppComponent implements OnInit {
   readText() {
     if ('speechSynthesis' in window) {
       const speech = new SpeechSynthesisUtterance(this.currentWord.english);
+
       speech.lang = 'en-US';
 
       const setVoice = () => {
         const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(voice => voice.lang.startsWith('en') && voice.name.includes('English'));
+
+        let englishVoice = voices.find(
+          voice => voice.lang === 'en-US' && voice.name.includes('Google')
+        );
+
+        if (!englishVoice) {
+          englishVoice = voices.find(voice => voice.lang.startsWith('en'));
+        }
+
         if (englishVoice) {
           speech.voice = englishVoice;
+        } else {
+          console.warn('No English voice found on this system.');
         }
+
         window.speechSynthesis.speak(speech);
       };
 
@@ -331,6 +343,7 @@ export class AppComponent implements OnInit {
       alert('Text-to-speech is not supported in your browser.');
     }
   }
+
 
   settingsToggle() {
     this.settings = !this.settings;
