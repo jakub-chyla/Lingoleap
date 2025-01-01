@@ -268,40 +268,42 @@ export class AppComponent implements OnInit {
   }
 
   checkAnswer(answer: string) {
-    const isCorrect = (word: string, answer: string) => word === answer;
-
-    const updateButtonState = (correctIndex: number) => {
-      this.disableButton1 = correctIndex !== 0;
-      this.disableButton2 = correctIndex !== 1;
-      this.disableButton3 = correctIndex !== 2;
-      this.disableButton4 = correctIndex !== 3;
-      this.disableButton5 = correctIndex !== 4;
-      this.disableButton6 = correctIndex !== 5;
-      this.disableButton7 = correctIndex !== 6;
-      this.disableButton8 = correctIndex !== 7;
-      this.disableButton9 = correctIndex !== 8;
-    };
-    if (this.autoRead) {
-      this.readText();
-    }
-
-    const currentWord = this.englishToPolish ? this.currentWord.polish : this.currentWord.english;
-
-    for (let i = 0; i < this.answers.length; i++) {
-      if (isCorrect(currentWord, this.answers[i])) {
-        updateButtonState(i);
-        break;
-      }
-    }
-
-
     if (this.newShuffle) {
-      this.countAnswer(answer);
-      this.newShuffle = false;
-    }
+      const isCorrect = (word: string, answer: string) => word === answer;
 
-    if (this.autoNext) {
-      this.countdownAfterAnswer();
+      const updateButtonState = (correctIndex: number) => {
+        this.disableButton1 = correctIndex !== 0;
+        this.disableButton2 = correctIndex !== 1;
+        this.disableButton3 = correctIndex !== 2;
+        this.disableButton4 = correctIndex !== 3;
+        this.disableButton5 = correctIndex !== 4;
+        this.disableButton6 = correctIndex !== 5;
+        this.disableButton7 = correctIndex !== 6;
+        this.disableButton8 = correctIndex !== 7;
+        this.disableButton9 = correctIndex !== 8;
+      };
+
+      if (this.autoRead) {
+        this.readText();
+      }
+
+      const currentWord = this.englishToPolish ? this.currentWord.polish : this.currentWord.english;
+
+      for (let i = 0; i < this.answers.length; i++) {
+        if (isCorrect(currentWord, this.answers[i])) {
+          updateButtonState(i);
+          break;
+        }
+      }
+
+      if (this.newShuffle) {
+        this.countAnswer(answer);
+        this.newShuffle = false;
+      }
+
+      if (this.autoNext) {
+        this.countdownAfterAnswer();
+      }
     }
   }
 
@@ -350,7 +352,6 @@ export class AppComponent implements OnInit {
       alert('Text-to-speech is not supported in your browser.');
     }
   }
-
 
   settingsToggle() {
     this.settings = !this.settings;
