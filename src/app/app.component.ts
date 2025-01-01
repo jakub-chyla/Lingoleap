@@ -30,7 +30,7 @@ const wordsList: Word[] = [
   new Word("duke", "książę"),
   new Word("emphasis", "podkreślenie"),
   new Word("entire world", "cały świat"),
-  new Word("eventually", "w końcu"),
+  new Word("eventually", "ostatecznie"),
   new Word("for quite some time", "przez jakiś czas"),
   new Word("frugal", "osczędny"),
   new Word("gathered", "zbierać"),
