@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
   count!: number;
   settings = false;
   countDown = false;
-  autoNext = false;
+  autoNext = true;
   autoRead = false;
   isLoading = false;
   disableButton1 = false;
