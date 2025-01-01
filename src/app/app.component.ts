@@ -74,6 +74,11 @@ const wordsList: Word[] = [
   new Word("top off", "dopełnić"),
   new Word("somebody has to", "ktoś musi"),
   new Word("intentional", "umyślny"),
+  new Word("duke", "książę"),
+  new Word("obnoxious", "obrzydliwy"),
+  new Word("counterpart", "odpowiednik"),
+  new Word("tangled", "zaplątany"),
+  new Word("since inception", "od początku istnienia"),
   new Word("to lurk", "czaić się"),
   new Word("pardon my french", "przeprszam za przekleństwa"),
 ];
