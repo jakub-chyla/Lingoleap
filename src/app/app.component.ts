@@ -4,7 +4,7 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {Word} from "./word";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 
 const wordsList: Word[] = [
   new Word("abbreviation", "skrót"),
@@ -41,6 +41,7 @@ const wordsList: Word[] = [
   new Word("however", "jednakże"),
   new Word("high hope", "wielka nadzieja"),
   new Word("imposter", "oszust"),
+  new Word("irrelevant", "nieistotny"),
   new Word("incentives", "zachęty"),
   new Word("intentional", "umyślny"),
   new Word("intended", "przeznaczony"),
@@ -94,7 +95,8 @@ const wordsList: Word[] = [
     MatCardContent,
     FormsModule,
     MatSlideToggle,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -114,15 +116,15 @@ export class AppComponent implements OnInit {
   autoRead = false;
   isLoading = false;
   newShuffle = false;
-  disableButton1 = false;
-  disableButton2 = false;
-  disableButton3 = false;
-  disableButton4 = false;
-  disableButton5 = false;
-  disableButton6 = false;
-  disableButton7 = false;
-  disableButton8 = false;
-  disableButton9 = false;
+  buttonStatus1: number = 0;
+  buttonStatus2: number = 0;
+  buttonStatus3: number = 0;
+  buttonStatus4: number = 0;
+  buttonStatus5: number = 0;
+  buttonStatus6: number = 0;
+  buttonStatus7: number = 0;
+  buttonStatus8: number = 0;
+  buttonStatus9: number = 0;
   englishToPolish = false;
 
   ngOnInit() {
@@ -198,15 +200,15 @@ export class AppComponent implements OnInit {
       this.countdownAfterShuffle();
     }
 
-    this.disableButton1 = false;
-    this.disableButton2 = false;
-    this.disableButton3 = false;
-    this.disableButton4 = false;
-    this.disableButton5 = false;
-    this.disableButton6 = false;
-    this.disableButton7 = false;
-    this.disableButton8 = false;
-    this.disableButton9 = false;
+    this.buttonStatus1 = 0;
+    this.buttonStatus2 = 0;
+    this.buttonStatus3 = 0;
+    this.buttonStatus4 = 0;
+    this.buttonStatus5 = 0;
+    this.buttonStatus6 = 0;
+    this.buttonStatus7 = 0;
+    this.buttonStatus8 = 0;
+    this.buttonStatus9 = 0;
 
     this.newShuffle = true;
   }
@@ -267,20 +269,30 @@ export class AppComponent implements OnInit {
     ];
   }
 
-  checkAnswer(answer: string) {
+  checkAnswer(answer: string, clickedButton: number) {
     if (this.newShuffle) {
       const isCorrect = (word: string, answer: string) => word === answer;
-
       const updateButtonState = (correctIndex: number) => {
-        this.disableButton1 = correctIndex !== 0;
-        this.disableButton2 = correctIndex !== 1;
-        this.disableButton3 = correctIndex !== 2;
-        this.disableButton4 = correctIndex !== 3;
-        this.disableButton5 = correctIndex !== 4;
-        this.disableButton6 = correctIndex !== 5;
-        this.disableButton7 = correctIndex !== 6;
-        this.disableButton8 = correctIndex !== 7;
-        this.disableButton9 = correctIndex !== 8;
+
+        this.buttonStatus1 = (clickedButton !== correctIndex && clickedButton === 0) ? 2 : 3;
+        this.buttonStatus2 = (clickedButton !== correctIndex && clickedButton === 1) ? 2 : 3;
+        this.buttonStatus3 = (clickedButton !== correctIndex && clickedButton === 2) ? 2 : 3;
+        this.buttonStatus4 = (clickedButton !== correctIndex && clickedButton === 3) ? 2 : 3;
+        this.buttonStatus5 = (clickedButton !== correctIndex && clickedButton === 4) ? 2 : 3;
+        this.buttonStatus6 = (clickedButton !== correctIndex && clickedButton === 5) ? 2 : 3;
+        this.buttonStatus7 = (clickedButton !== correctIndex && clickedButton === 6) ? 2 : 3;
+        this.buttonStatus8 = (clickedButton !== correctIndex && clickedButton === 7) ? 2 : 3;
+        this.buttonStatus9 = (clickedButton !== correctIndex && clickedButton === 8) ? 2 : 3;
+
+        if (correctIndex === 0) this.buttonStatus1 = 1;
+        if (correctIndex === 1) this.buttonStatus2 = 1;
+        if (correctIndex === 2) this.buttonStatus3 = 1;
+        if (correctIndex === 3) this.buttonStatus4 = 1;
+        if (correctIndex === 4) this.buttonStatus5 = 1;
+        if (correctIndex === 5) this.buttonStatus6 = 1;
+        if (correctIndex === 6) this.buttonStatus7 = 1;
+        if (correctIndex === 7) this.buttonStatus8 = 1;
+        if (correctIndex === 8) this.buttonStatus9 = 1;
       };
 
       if (this.autoRead) {
