@@ -45,7 +45,7 @@ const wordsList: Word[] = [
   new Word("however", "jednakże"),
   new Word("high hope", "wielka nadzieja"),
   new Word("imposter", "oszust"),
-  new Word("grieving", "grieving"),
+  new Word("grieving", "opłakiwać"),
   new Word("irrelevant", "nieistotny"),
   new Word("incentives", "zachęty"),
   new Word("intentional", "umyślny"),
