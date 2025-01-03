@@ -14,7 +14,7 @@ const wordsList: Word[] = [
   new Word("anytime soon", "w najbliższym czasie"),
   new Word("apparent", "pozorny"),
   new Word("arson", "podpalenie"),
-  new Word("alleged", "rzekomy"),
+  new Word("alleged shooter", "rzekomy strzelec"),
   new Word("cherished", "ceniony"),
   new Word("citation", "cytat"),
   new Word("clerk", "urzędnik"),
