@@ -4,7 +4,7 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {Word} from "./word";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {NgClass, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 
 const wordsList: Word[] = [
   new Word("a notice", "wypowiedzenie"),
@@ -117,7 +117,8 @@ const wordsList: Word[] = [
     FormsModule,
     MatSlideToggle,
     NgIf,
-    NgClass
+    NgClass,
+    NgForOf
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -137,16 +138,13 @@ export class AppComponent implements OnInit {
   autoRead = false;
   isLoading = false;
   newShuffle = false;
-  buttonStatus1: number = 0;
-  buttonStatus2: number = 0;
-  buttonStatus3: number = 0;
-  buttonStatus4: number = 0;
-  buttonStatus5: number = 0;
-  buttonStatus6: number = 0;
-  buttonStatus7: number = 0;
-  buttonStatus8: number = 0;
-  buttonStatus9: number = 0;
+  buttonStatuses: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
   englishToPolish = false;
+  buttonRows: number[][] = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8]
+  ];
 
   ngOnInit() {
     this.initWordsList = wordsList;
@@ -221,15 +219,9 @@ export class AppComponent implements OnInit {
       this.countdownAfterShuffle();
     }
 
-    this.buttonStatus1 = 0;
-    this.buttonStatus2 = 0;
-    this.buttonStatus3 = 0;
-    this.buttonStatus4 = 0;
-    this.buttonStatus5 = 0;
-    this.buttonStatus6 = 0;
-    this.buttonStatus7 = 0;
-    this.buttonStatus8 = 0;
-    this.buttonStatus9 = 0;
+    for (let i = 0; i < this.buttonStatuses.length; i++) {
+      this.buttonStatuses[i] = 0;
+    }
 
     this.newShuffle = true;
   }
@@ -276,18 +268,8 @@ export class AppComponent implements OnInit {
   }
 
   justifyAnswers() {
-    const sortedAnswers = this.answers.sort((a, b) => a.length - b.length);
-    this.answers = [
-      sortedAnswers[0],
-      sortedAnswers[3],
-      sortedAnswers[8],
-      sortedAnswers[1],
-      sortedAnswers[4],
-      sortedAnswers[7],
-      sortedAnswers[2],
-      sortedAnswers[5],
-      sortedAnswers[6]
-    ];
+    const sortAnswer = this.answers.sort((a, b) => a.length - b.length);
+    this.answers = [sortAnswer[0], sortAnswer[3], sortAnswer[8], sortAnswer[1], sortAnswer[4], sortAnswer[7], sortAnswer[2], sortAnswer[5], sortAnswer[6]];
   }
 
   checkAnswer(answer: string, clickedButton: number) {
@@ -295,25 +277,15 @@ export class AppComponent implements OnInit {
       const isCorrect = (word: string, answer: string) => word === answer;
       const updateButtonState = (correctIndex: number) => {
 
-        this.buttonStatus1 = (clickedButton !== correctIndex && clickedButton === 0) ? 2 : 3;
-        this.buttonStatus2 = (clickedButton !== correctIndex && clickedButton === 1) ? 2 : 3;
-        this.buttonStatus3 = (clickedButton !== correctIndex && clickedButton === 2) ? 2 : 3;
-        this.buttonStatus4 = (clickedButton !== correctIndex && clickedButton === 3) ? 2 : 3;
-        this.buttonStatus5 = (clickedButton !== correctIndex && clickedButton === 4) ? 2 : 3;
-        this.buttonStatus6 = (clickedButton !== correctIndex && clickedButton === 5) ? 2 : 3;
-        this.buttonStatus7 = (clickedButton !== correctIndex && clickedButton === 6) ? 2 : 3;
-        this.buttonStatus8 = (clickedButton !== correctIndex && clickedButton === 7) ? 2 : 3;
-        this.buttonStatus9 = (clickedButton !== correctIndex && clickedButton === 8) ? 2 : 3;
-
-        if (correctIndex === 0) this.buttonStatus1 = 1;
-        if (correctIndex === 1) this.buttonStatus2 = 1;
-        if (correctIndex === 2) this.buttonStatus3 = 1;
-        if (correctIndex === 3) this.buttonStatus4 = 1;
-        if (correctIndex === 4) this.buttonStatus5 = 1;
-        if (correctIndex === 5) this.buttonStatus6 = 1;
-        if (correctIndex === 6) this.buttonStatus7 = 1;
-        if (correctIndex === 7) this.buttonStatus8 = 1;
-        if (correctIndex === 8) this.buttonStatus9 = 1;
+        for (let i = 0; i < this.buttonStatuses.length; i++) {
+          if (i === correctIndex) {
+            this.buttonStatuses[i] = 1; // Correct answer
+          } else if (i === clickedButton && clickedButton !== correctIndex) {
+            this.buttonStatuses[i] = 2; // Wrong answer
+          } else {
+            this.buttonStatuses[i] = 3; // Disabled
+          }
+        }
       };
 
       if (this.autoRead) {
@@ -372,7 +344,6 @@ export class AppComponent implements OnInit {
         } else {
           console.warn('No English voice found on this system.');
         }
-
         window.speechSynthesis.speak(speech);
       };
 

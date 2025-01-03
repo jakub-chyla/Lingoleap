@@ -22,71 +22,20 @@
           <ng-template [ngIf]="isLoading">
             <div> {{ count }}</div>
           </ng-template>
-          <ng-template [ngIf]="!isLoading">
-            <div>
-              <button [disabled]="buttonStatus1 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus1 === 0, 'good-answer': buttonStatus1 === 1, 'wrong-answer': buttonStatus1 === 2, 'disable-button': buttonStatus1 === 3}"
-                      (click)="checkAnswer(answers[0] ,0)">{{ answers[0] }}
-              </button>
-            </div>
-            <div>
-              <button [disabled]="buttonStatus2 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus2 === 0, 'good-answer': buttonStatus2 === 1, 'wrong-answer': buttonStatus2 === 2, 'disable-button': buttonStatus2 === 3}"
-                      (click)="checkAnswer(answers[1],1)">{{ answers[1] }}
-              </button>
-            </div>
-            <div>
-              <button [disabled]="buttonStatus3 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus3 === 0, 'good-answer': buttonStatus3 === 1, 'wrong-answer': buttonStatus3 === 2, 'disable-button': buttonStatus3 === 3}"
-                      (click)="checkAnswer(answers[2],2)">{{ answers[2] }}
-              </button>
-            </div>
-          </ng-template>
         </div>
-        <div class="button-container-row answer-buttons">
-          <ng-template [ngIf]="!isLoading">
-            <div>
-              <button [disabled]="buttonStatus4 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus4 === 0, 'good-answer': buttonStatus4 === 1, 'wrong-answer': buttonStatus4 === 2, 'disable-button': buttonStatus4 === 3}"
-                      (click)="checkAnswer(answers[3],3)">{{ answers[3] }}
-              </button>
-            </div>
-            <div>
-              <button [disabled]="buttonStatus5 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus5 === 0, 'good-answer': buttonStatus5 === 1, 'wrong-answer': buttonStatus5 === 2, 'disable-button': buttonStatus5 === 3}"
-                      (click)="checkAnswer(answers[4],4)">{{ answers[4] }}
-              </button>
-            </div>
-            <div>
-              <button [disabled]="buttonStatus6 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus6 === 0, 'good-answer': buttonStatus6 === 1, 'wrong-answer': buttonStatus6 === 2, 'disable-button': buttonStatus6 === 3}"
-                      (click)="checkAnswer(answers[5],5)">{{ answers[5] }}
-              </button>
-            </div>
-          </ng-template>
-        </div>
-        <div class="button-container-row answer-buttons">
-          <ng-template [ngIf]="!isLoading">
-            <div>
-              <button [disabled]="buttonStatus7 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus7 === 0, 'good-answer': buttonStatus7 === 1, 'wrong-answer': buttonStatus7 === 2, 'disable-button': buttonStatus7 === 3}"
-                      (click)="checkAnswer(answers[6],6)">{{ answers[6] }}
-              </button>
-            </div>
-            <div>
-              <button [disabled]="buttonStatus8 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus8 === 0,'good-answer': buttonStatus8 === 1, 'wrong-answer': buttonStatus8 === 2, 'disable-button': buttonStatus8 === 3}"
-                      (click)="checkAnswer(answers[7],7)">{{ answers[7] }}
-              </button>
-            </div>
-            <div>
-              <button [disabled]="buttonStatus9 === 3" mat-raised-button
-                      [ngClass]="{'answer-button': buttonStatus9 === 0, 'good-answer': buttonStatus9 === 1, 'wrong-answer': buttonStatus9 === 2, 'disable-button': buttonStatus9 === 3}"
-                      (click)="checkAnswer(answers[8],8)">{{ answers[8] }}
-              </button>
-            </div>
-          </ng-template>
-        </div>
+        <ng-container *ngIf="!isLoading">
+          <div class="button-container-row answer-buttons" *ngFor="let row of buttonRows">
+            <button
+              *ngFor="let i of row"
+              [disabled]="buttonStatuses[i] === 3"
+              mat-raised-button
+              [ngClass]="{'answer-button': buttonStatuses[i] === 0,'good-answer': buttonStatuses[i] === 1,
+        'wrong-answer': buttonStatuses[i] === 2,'disable-button': buttonStatuses[i] === 3}"
+              (click)="checkAnswer(answers[i], i)">
+              {{ answers[i] }}
+            </button>
+          </div>
+        </ng-container>
       </ng-template>
       <ng-template [ngIf]="settings">
         <div class="word">{{ 'count down' }}
