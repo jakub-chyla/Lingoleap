@@ -60,6 +60,7 @@ const wordsList: Word[] = [
   new Word("it's not over", "to nie koniec"),
   new Word("miserable", "nieszczęśliwy"),
   new Word("like any other", "jak każdy inny"),
+  new Word("like no other", "like no other"),
   new Word("manhunt", "obława"),
   new Word("neglect", "zaniedbanie"),
   new Word("newcomers", "przybysze"),
@@ -100,12 +101,12 @@ const wordsList: Word[] = [
   new Word("transaction fees", "opłaty transakcyjne"),
   new Word("verbose", "gadatliwy"),
   new Word("volatility", "zmienność"),
+  new Word("vulnerable information", "wrażliwe informacje"),
   new Word("wanderlust", "zamiłowanie do włóczęgi"),
   new Word("ways and means", "sposoby i środki"),
   new Word("water scarcity", "niedobór wody"),
   new Word("we'll get to it", "dojdziemy do tego"),
   new Word("worn out", "zużyte"),
-  new Word("vulnerable information", "wrażliwe informacje"),
   new Word("year prior", "rok wcześniej"),
 ];
 
@@ -266,7 +267,7 @@ export class AppComponent implements OnInit {
         clearInterval(interval);
         this.shuffle();
       }
-    }, 500);
+    }, 400);
   }
 
   justifyAnswers() {
