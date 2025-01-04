@@ -7,13 +7,13 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 
 const wordsList: Word[] = [
-  new Word("a notice", "wypowiedzenie"),
+  new Word("notice", "wypowiedzenie"),
   new Word("abbreviation", "skrót"),
   new Word("according to", "według"),
   new Word("advocated", "popierał"),
   new Word("anytime soon", "w najbliższym czasie"),
   new Word("apparent", "pozorny"),
-  new Word("aftermath of flooding", "skutki powodzi"),
+  new Word("flooding aftermath", "skutki powodzi"),
   new Word("acquisition", "nabytek"),
   new Word("arson", "podpalenie"),
   new Word("alleged shooter", "rzekomy strzelec"),
@@ -40,7 +40,7 @@ const wordsList: Word[] = [
   new Word("diminishing to", "malejący"),
   new Word("discrepancy", "rozbieżność"),
   new Word("distortion", "zniekształcenie"),
-  new Word("a duke", "książę"),
+  new Word("duke", "książę"),
   new Word("emphasis", "podkreślenie"),
   new Word("entire world", "cały świat"),
   new Word("eventually", "ostatecznie"),
@@ -60,6 +60,7 @@ const wordsList: Word[] = [
   new Word("paid in advance", "zapłacono z góry"),
   new Word("incentives", "zachęty"),
   new Word("incomprehensible", "niezrozumiały"),
+  new Word("intimidating", "onieśmielający"),
   new Word("intentional", "umyślny"),
   new Word("intended", "przeznaczony"),
   new Word("it's been a while", "minęło trochę czasu"),
