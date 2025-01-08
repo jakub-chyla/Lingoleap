@@ -47,7 +47,7 @@ const wordsList: Word[] = [
   new Word("disease outbreak", "wybuch epidemii"),
   new Word("despicable", "nikczemny"),
   new Word("deterrence", "odstraszenie"),
-  new Word("diminishing to", "malejący"),
+  new Word("diminish", "zmniejszać"),
   new Word("discrepancy", "rozbieżność"),
   new Word("distortion", "zniekształcenie"),
   new Word("duke", "książę"),
