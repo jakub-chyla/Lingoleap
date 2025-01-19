@@ -175,6 +175,8 @@ const wordsList: Word[] = [
   new Word("vulnerable information", "wrażliwe informacje"),
   new Word("wanderlust", "zamiłowanie do włóczęgi"),
   new Word("workaround", "obejście problemu"),
+  new Word("wig", "peruka"),
+  new Word("wick", "knot"),
   new Word("wrap ups", "podsumowanie"),
   new Word("we did so", "zrobiliśmy to"),
   new Word("work is a backdrop of story", "praca jest tłem opowieści"),
