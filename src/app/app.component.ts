@@ -146,7 +146,7 @@ const wordsList: Word[] = [
   new Word("salvation", "zbawienie"),
   new Word("slurp", "śorbać"),
   new Word("statement", "stwierdzenie"),
-  new Word("scoop over", "przesuń się"),
+  new Word("scoot over", "przesuń się"),
   new Word("sophisticated", "wyrafinowany"),
   new Word("swept under a rug", "zamiecione pod dywan"),
   new Word("step out", "wyjść"),
