@@ -74,7 +74,7 @@ const wordsList: Word[] = [
   new Word("depleted", "wyczerpany"),
   new Word("debris", "gruz"),
   new Word("emphasis", "podkreślenie"),
-  new Word("elaborate", "podkreślenie"),
+  new Word("elaborate", "wyszukany"),
   new Word("entrepreneur", "przedsiębiorca"),
   new Word("enlightenment", "oświecenie"),
   new Word("entire world", "cały świat"),
