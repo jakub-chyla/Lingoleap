@@ -63,6 +63,7 @@ const wordsList: Word[] = [
   new Word("despite an effort", "pomimo wysiłku"),
   new Word("disease outbreak", "wybuch epidemii"),
   new Word("despicable", "nikczemny"),
+  new Word("distinguish", "wyróżnić"),
   new Word("deterrence", "odstraszenie"),
   new Word("diminish", "zmniejszać"),
   new Word("discrepancy", "rozbieżność"),
